@@ -19,16 +19,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/posts',(req, res, next) => {
-  const posts = [
-    {id: '1ab2c3', title: 'first server-side post', content: 'server-side content'},
-    {id: '4d5e6f', title: 'second server-side post', content: 'second server-side content'}
-  ]
-  res.status(200).json({
-    message: 'post fetched successfully',
-    posts: posts
-  })
-});
 
 app.post('/api/posts', (req, res, next) => {
   const post = req.body;
@@ -39,5 +29,15 @@ app.post('/api/posts', (req, res, next) => {
   });
 });
 
+app.use('/api/posts',(req, res, next) => {
+  const posts = [
+    {id: '1ab2c3', title: 'first server-side post', content: 'server-side content'},
+    {id: '4d5e6f', title: 'second server-side post', content: 'second server-side content'}
+  ]
+  res.status(200).json({
+    message: 'post fetched successfully',
+    posts: posts
+  })
+});
 
 module.exports = app;
