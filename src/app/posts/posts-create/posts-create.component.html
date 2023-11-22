@@ -1,11 +1,11 @@
 <mat-card>
-  <input type="text" matInput [(ngModel)]="enteredTitle">
+  <mat-form-field>
+    <input type="text" matInput [(ngModel)]="enteredTitle">
+  </mat-form-field>
   <mat-form-field>
     <textarea matInput [(ngModel)]="enteredContent"></textarea>
   </mat-form-field>
-  <button
-  mat-raised-button
-  color="primary"
-  (click)="onAddPost()"> Save Post </button>
-</mat-card>
+  <button mat-raised-button color="primary" (click)="onAddPost()" *ngIf="mode === postMode.CREATE">Save Post</button>
+  <button mat-raised-button color="accent" (click)="onUpdatePost()" *ngIf="mode === postMode.EDIT">Update Post</button>
 
+</mat-card>

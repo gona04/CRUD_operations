@@ -22,4 +22,9 @@ export class PostsListComponent implements OnInit{
       this.posts = data;
     })
   }
+
+  onDelete(id: any) {
+    console.log(id);
+    this._postsService.postDeleteBackend(id)
+  }
 }

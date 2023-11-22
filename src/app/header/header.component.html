@@ -1,3 +1,4 @@
-<mat-toolbar color="primary">
-  <span>My Messages</span>
+<mat-toolbar color="primary" style="display: flex; justify-content: space-between;">
+  <span routerLink="/">My Messages</span>
+  <span [routerLink]="['create-posts']"> Add Posts </span>
 </mat-toolbar>
