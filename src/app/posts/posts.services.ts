@@ -60,8 +60,12 @@ export class PostsService {
     return post ? { ...post } : undefined;
   }
 
-  updatePostBackend(id: string, title: string, content: string) {
-    const post: Post =  {id: id, title: title, content: content};
-
+  updatePostBackend(post: Post) {
+    this.http.put('http://localhost:3000/api/posts/' + post.id, post).subscribe(result => {
+      console.dir(this.posts , "BEFORE")
+      const postId = this.posts.findIndex(e => e.id === post.id );
+      console.dir(this.posts , "After")
+      this.posts[postId] = post;
+    })
   }
 }

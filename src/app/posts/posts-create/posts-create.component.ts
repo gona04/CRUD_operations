@@ -15,11 +15,9 @@ enum PostMode {
 })
 export class PostCreateComponent implements OnInit {
 
-  enteredTitle = '';
-  enteredContent = '';
-  private postId!: string | null;
+  post: Post = {id: '', content: '', title: ''};
   mode!: PostMode;
-  private post!: Post;
+  private postId!: string | null;
 
   constructor(private _postsService: PostsService, public route: ActivatedRoute) {}
 
@@ -29,7 +27,6 @@ export class PostCreateComponent implements OnInit {
         this.mode = PostMode.EDIT;
         this.postId = paramMap.get('postId');
         this.post = this._postsService.getPostById(this.postId) || {} as Post;
-        this.setForEdit();
       } else {
         this.mode = PostMode.CREATE;
         this.postId = null;
@@ -37,26 +34,15 @@ export class PostCreateComponent implements OnInit {
     });
   }
 
-  setForEdit() {
-    this.enteredContent = this.post.content;
-    this.enteredTitle = this.post.title;
-  }
 
   onAddPost() {
-    console.dir(this.enteredContent);
-    const post: Post = {
-      id: '1',
-      title: this.enteredTitle,
-      content: this.enteredContent
-    };
-    this._postsService.setPost(post);
-    this.enteredContent = "";
-    this.enteredTitle = "";
+    console.dir(this.post);
+    this._postsService.setPost(this.post);
   }
 
   onUpdatePost() {
-    console.dir(this.enteredContent);
-    // Implement the logic for updating the post
+    console.dir(this.post.content+ "FROM EDIT");
+    this._postsService.updatePostBackend(this.post)
   }
 
   get postMode(): typeof PostMode {
